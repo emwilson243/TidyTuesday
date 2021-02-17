@@ -7,9 +7,7 @@
 library(tidyverse)
 library(tidytuesdayR)
 library(here)
-library(cowplot)
 library(extrafont)
-library(fontcm)
 
 ### Load data ##########################
 
@@ -53,19 +51,19 @@ ggplot(freed_slaves, #tell R what data to use
                      position = "top", # put x axis on top
                      breaks = c(1790, 1800, 1810, 1820, 1830, 1840, 1850, 1860, 1870)) + # set breaks
   scale_y_continuous(limits = c(0, 100), expand = c(0, 0)) + # set limits and remove blank space
-  annotate("text", x = 1792, y = 93.5, label = "8%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1800, y = 90, label = "11%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1810, y = 88.5, label = "13.5%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1820, y = 88.5, label = "13%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1830, y = 87.5, label = "14%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1840, y = 88.5, label = "13%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1850, y = 89.5, label = "12%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1860, y = 90.5, label = "11%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1867, y =90, label = "100%", family = "Andale Mono", size = 4) +
-  annotate("text", x = 1830, y = 96, label = "FREE - LIBRE",  family = "Andale Mono", size = 6) +
-  annotate("text", x = 1830, y = 58, label = "SLAVES", color = "white", family = "Andale Mono", size = 9) +
-  annotate("text", x = 1830, y = 53.6, label = "ESCLAVES", color = "white", family = "Andale Mono", size = 9) +
-  ggsave(here("20210216_dubois", "outputs", "dubois.png"), width = 7.5, height = 9.8)
+  annotate("text", x = 1792, y = 93.5, label = "8%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1800, y = 90, label = "11%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1810, y = 88.5, label = "13.5%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1820, y = 88.5, label = "13%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1830, y = 87.5, label = "14%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1840, y = 88.5, label = "13%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1850, y = 89.5, label = "12%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1860, y = 90.5, label = "11%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1867, y =90, label = "100%", family = "Andale Mono", size = 4) + # add value annotation
+  annotate("text", x = 1830, y = 96, label = "FREE - LIBRE",  family = "Andale Mono", size = 6) + # add top annotation
+  annotate("text", x = 1830, y = 58, label = "SLAVES", color = "white", family = "Andale Mono", size = 9) + # add middle annotation (pt 1)
+  annotate("text", x = 1830, y = 53.6, label = "ESCLAVES", color = "white", family = "Andale Mono", size = 9) + # add middle annotation (pt 2)
+  ggsave(here("20210216_dubois", "outputs", "dubois.png"), width = 7.5, height = 9.8) # save to outputs folder for this week
 
 
 
