@@ -34,7 +34,7 @@ back <- cal_palette("coastaldune1")[4] # set plot background color
          aes(x = date, # set date for x axis
              y = median_weekly_earn, # set weekly median income for y axis
              color= sex)) + # set color to sex
-  geom_point() + # set scatterplot
+  geom_point(size = 1) + # set scatterplot and point size
    scale_color_manual(values = pal) + # set colors to use
   facet_wrap(~age, # facet wrap by age for multiple plots
              nrow = 1) + # set all plots in the same row for side-by-side comparison
@@ -45,17 +45,21 @@ back <- cal_palette("coastaldune1")[4] # set plot background color
         subtitle = "Median weekly earnings for women and men by age group", # add subtitle
         x = "Date", # capitalize x axis label
         y = "Median Weekly Income", # capitalize y axis label
-        caption = "Vizualization: Emily Wilson (@emwilson243) | Source: BLS | #TidyTuesday", # add caption
+        caption = "Vizualization: Emily Wilson (@emwilson243) | Source: BLS", # add caption
         color = "Sex") + # capitalize legend title
    theme(strip.background = element_rect(fill = ban), # set plot label panel background to the color I wanted
          plot.background = element_rect(fill = back), # set plot background color
          legend.background = element_rect(colour = 'black', # give legend a black outline
                                           size = 0.25), # change thickness of legend outline
-         legend.position = c(.085, .75), # move legend
-         plot.margin = unit(c(0.65, 0.5, 0.5, 0.5), "cm"), # mess with plot margins for more space
+         legend.position = c(.08, .75), # move legend
+         plot.margin = unit(c(0.6, 0.5, 0.5, 0.5), "cm"), # mess with plot margins for more space
          plot.title = element_text(vjust = 2.5), # space things out a bit
-         plot.subtitle = element_text(vjust = 2)) + # space things out a bit
-   ggsave(here("20210223_employedstatus", "outputs", "income.png"), width = 14, height = 8, unit = "in") # save to outputs folder for this week
+         plot.subtitle = element_text(vjust = 2), # space things out a bit
+         plot.caption = element_text(vjust = -2), # space out plot caption
+         axis.title.x = element_text(vjust = -2), # space out x axis label
+         axis.text.x = element_text(size = 8), # make x label text smaller so they don't overlap
+         axis.text.y = element_text(size = 8)) + # make y label text smaller to match x text
+   ggsave(here("20210223_employedstatus", "outputs", "income.png"), width = 9, height = 4, unit = "in") # save to outputs folder for this week
     
 
 
