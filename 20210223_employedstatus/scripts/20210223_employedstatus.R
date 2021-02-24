@@ -21,7 +21,7 @@ earn <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidyt
 
 earn_graph <- earn %>% 
   filter(!sex == "Both Sexes") %>% # remove "Both sexes" so only male and female remain
-  filter(age %in% c("16 to 19 years", "20 to 24 years", "25 to 34 years", "24 to 54 years", "34 to 44 years", "45 to 54 years", 
+  filter(age %in% c("16 to 19 years", "20 to 24 years", "25 to 34 years", "24 to 54 years", "35 to 44 years", "45 to 54 years", 
                     "55 to 64 years", "65 years and over")) %>% # filter out weird other age classes that kept messing me up
   mutate(date = (yq(paste(year, quarter, sep = "-")))) %>% # set year and quarter into date format
   select(sex, age, date, median_weekly_earn) # select the columns I want to use
@@ -51,7 +51,7 @@ back <- cal_palette("coastaldune1")[4] # set plot background color
          plot.background = element_rect(fill = back), # set plot background color
          legend.background = element_rect(colour = 'black', # give legend a black outline
                                           size = 0.25), # change thickness of legend outline
-         legend.position = c(.08, .75), # move legend
+         legend.position = c(.07, .75), # move legend
          plot.margin = unit(c(0.6, 0.5, 0.5, 0.5), "cm"), # mess with plot margins for more space
          plot.title = element_text(vjust = 2.5), # space things out a bit
          plot.subtitle = element_text(vjust = 2), # space things out a bit
@@ -59,7 +59,7 @@ back <- cal_palette("coastaldune1")[4] # set plot background color
          axis.title.x = element_text(vjust = -2), # space out x axis label
          axis.text.x = element_text(size = 8), # make x label text smaller so they don't overlap
          axis.text.y = element_text(size = 8)) + # make y label text smaller to match x text
-   ggsave(here("20210223_employedstatus", "outputs", "income.png"), width = 9, height = 4, unit = "in") # save to outputs folder for this week
+   ggsave(here("20210223_employedstatus", "outputs", "income.png"), width = 10, height = 4, unit = "in") # save to outputs folder for this week
     
 
 
