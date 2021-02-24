@@ -45,7 +45,7 @@ back <- cal_palette("coastaldune1")[4] # set plot background color
         subtitle = "Median weekly earnings for women and men by age group", # add subtitle
         x = "Date", # capitalize x axis label
         y = "Median Weekly Income", # capitalize y axis label
-        caption = "Vizualization: Emily Wilson (@emwilson243) | Source: BLS", # add caption
+        caption = "Visualization: Emily Wilson (@emwilson243) | Source: BLS", # add caption
         color = "Sex") + # capitalize legend title
    theme(strip.background = element_rect(fill = ban), # set plot label panel background to the color I wanted
          plot.background = element_rect(fill = back), # set plot background color
