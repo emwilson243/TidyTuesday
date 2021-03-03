@@ -60,13 +60,3 @@ commercials <- youtube %>%
     scale_y_discrete(labels = c("Animals", "Celebrity", "Danger", "Funny", "Patriotic", "Shows Product Quickly", "Uses Sex")) + # label y axis with capitalization 
     ggsave(here("20210301_superbowl", "outputs", "commercial.png"), width = 8, height = 3.8, unit = "in") # save to outputs folder for this week
   
-  
-  
-
-
-
-
-
-
-
-
