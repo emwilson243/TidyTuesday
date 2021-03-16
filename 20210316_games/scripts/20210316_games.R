@@ -32,7 +32,7 @@ levels(games$month) <- c("January", "February", "March", "April", "May", "June",
   scale_x_discrete(labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")) + # change month labels
   coord_equal(1) + # make squares equal width/height
     labs(title = "Video Game Popularity", # add title
-         subtitle = "Average simultaneous monthly players and diferences compared to previous months for selected games on Steam in 2020", # add subtitle
+         subtitle = "Average simultaneous monthly players & differences in players compared to the previous month for selected games on Steam in 2020", # add subtitle
          caption = "Visualization: Emily Wilson (@emwilson243) | Source: SteamCharts", # add caption
          x = "Month", # change x axis title
          y = "Game", # change y axis title
@@ -45,21 +45,10 @@ levels(games$month) <- c("January", "February", "March", "April", "May", "June",
         axis.title.x = element_text(vjust = -8), # space x axis title out a bit
         legend.title.align = 0.5, # center legend titles
         plot.title = element_text(vjust = 6, hjust = -0.277), # space title out, move left
-        plot.subtitle = element_text(vjust = 6, hjust = 2.15), # space subtitle out, move left
+        plot.subtitle = element_text(vjust = 6, hjust = 1.055), # space subtitle out, move left
         plot.background = element_rect(fill = "grey87")) + # fill plot background
   ggsave(here("20210316_games", "outputs", "games.png"), width = 11, height = 5.85, unit = "in") # save to outputs folder for this week
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+# could have used facet_grid(~year) to get this for multiple years- looked cool but ended up being way too "busy"
 
