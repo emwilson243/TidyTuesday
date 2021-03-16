@@ -13,3 +13,5 @@ Folders are organized by date_topic, with subfolders for scripts and outputs.
 [2021-02-23](https://github.com/emwilson243/TidyTuesday/tree/main/20210223_employedstatus): Employed Status
 
 [2021-03-01](https://github.com/emwilson243/TidyTuesday/tree/main/20210301_superbowl): Super Bowl Commercials
+
+[2021-03-09](https://github.com/emwilson243/TidyTuesday/tree/main/20210309_bechdeltest): Bechdel Test
