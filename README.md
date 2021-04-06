@@ -21,3 +21,5 @@ Folders are organized by date_topic, with subfolders for scripts and outputs.
 [2021-03-22](https://github.com/emwilson243/TidyTuesday/tree/main/20210322_votes): UN Votes
 
 [2021-03-30](https://github.com/emwilson243/TidyTuesday/tree/main/20210330_makeup): Makeup
+
+[2021-04-06](https://github.com/emwilson243/TidyTuesday/tree/main/20210406_deforestation): Deforestation
