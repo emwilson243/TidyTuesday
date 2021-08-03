@@ -6,6 +6,7 @@
 library(tidyverse)
 library(here)
 library(ggalluvial) # for  making alluvial plot
+library(ggbeeswarm)
 
 ### Load data ###########################################################################################################################
 allNumbers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-03-30/allNumbers.csv') # import data
@@ -59,7 +60,8 @@ makeup_brands %>%
   theme_void() + # take out all unnecessary components with the void :)
   theme(legend.position = "none", # remove useless legend
         plot.margin = unit(c(-0.2, 0.5, -0.5, 0.5), "cm"), # mess with plot margin to fit everything
-        plot.caption = element_text(vjust = 15, hjust = 0.96)) + # adjust position of caption
+        plot.caption = element_text(vjust = 15, hjust = 0.96), # adjust position of caption
+        panel.background = element_rect(fill = "white")) + # keeps background panel from being transparent when saved with ggsave
   labs(caption = "Visualization: Emily Wilson (@emwilson243) | Source: The Pudding") + # add caption
   annotation_custom(p1, xmin = 1.6, xmax = 2.17, ymin = 47.5, ymax = 62.5) + # add histogram to this plot
   annotate("text", x = 2, y = 46, label = "Sorts from Light to Dark", fontface = 2, size = 4) + # add label for sorting, since the x axis functions hate me today
@@ -70,5 +72,47 @@ makeup_brands %>%
   annotate("text", x = 1.173, y = 54, label = "fewer foundations are available in darker shades compared to", size = 4) + # add, position, and format second line of "body" text
   annotate("text", x = 0.9, y = 53, label = "lighter ones.", size = 4) + # add, position, and format third line of "body" text
   annotate("text", x = 1.186, y = 51, label = "Many brands label their shades sequentially and may put lighter", size = 4) + # add, position, and format fourth line of "body" text
-  annotate("text", x = 1.128, y = 50, label = "colors first, prioritizing them on store shelves (below).", size = 4) + # add, position, and format last line of "body" text
-  ggsave(here("20210330_makeup", "outputs", "makeup.png"), width = 9.3, height = 11.18, unit = "in") # save to outputs folder for this week
+  annotate("text", x = 1.128, y = 50, label = "colors first, prioritizing them on store shelves (below).", size = 4) # add, position, and format last line of "body" text
+
+# Changed 08/02/2021; ggsave update no longer allows it to be "added" to an object, so this line of code is freestanding now.
+ggsave(here("20210330_makeup", "outputs", "makeup.png"), width = 9.3, height = 11.18, unit = "in") # save to outputs folder for this week
+
+##########################################################################################################################################################################################
+
+# Trying out scale_color_identity
+
+brand_counts <- allNumbers %>% 
+  select(brand) %>%
+  count(brand) # getting how many products in different shades each brand offers so I can narrow it down to the top five brands
+
+pop_brands <- allNumbers %>% 
+  filter(brand %in% c("bareMinerals", "SEPHORA COLLECTION", "MAKE UP FOR EVER", "FENTY BEAUTY by Rihanna", "Lancôme")) %>% # only keep top five brands
+  select(brand, hex, lightness) %>% # keep only the columns I want to use
+  mutate(brand = as.factor(brand)) %>% # change brand to a factor so I can dictate levels
+  mutate(brand = fct_relevel(brand, c("Lancôme", "FENTY BEAUTY by Rihanna", "MAKE UP FOR EVER", "SEPHORA COLLECTION", "bareMinerals"))) # rearrange factors so they rank correctly on graph
+
+  ggplot(pop_brands, 
+         aes(brand, # arrange by brand
+             lightness, #organize points by lightness value
+             color = hex), # assign color by hex code for each point
+         size = 7) + #make points larger
+  geom_quasirandom() + # get that cool violin plot effect with the points
+  scale_color_identity() + # color each point by its hex code
+    theme_minimal() + # remove extra graph elements
+    theme(axis.line = element_blank(), # remove x axis line
+          axis.title = element_blank(), # remove x axis title 
+          axis.text.x = element_blank(), # remove x axis text
+          axis.ticks.x = element_blank(), # remove x axis ticks
+          axis.text.y = element_text(hjust = 0.5), # align y axis labels to middle
+          panel.grid = element_blank(), # remove panel grid lines
+          plot.title = element_text(hjust = -1, margin = margin(t=10), size = 25), # make the plot title larger and give it more space
+          plot.subtitle = element_text(hjust = -1.55, margin = margin(t=10)), # give the plot subtitle more space
+          plot.background = element_rect(fill = "white"), # make background white b/c not the default is transparent
+          plot.margin = unit(c(0.3, 0.2, 0.2, 0.7), "cm")) + # give the plot elements more surrounding space
+    coord_flip() + # switch x and y locations
+    labs(title = "Foundation Shades from Top Brands", # add title
+          subtitle = "Foundation shade availability for makeup brands with the greatest number of product options", # add subtitle
+          caption = "Visualization: Emily Wilson (@emwilson243) | Source: The Pudding") # add caption
+
+  ggsave(here("20210330_makeup", "outputs", "makeup2.png"), width = 9.3, height = 11.18, unit = "in") # save to outputs folder for this week
+  
